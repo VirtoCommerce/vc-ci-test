@@ -51,6 +51,16 @@ jobs:
       moduleId: ${{ steps.artifact_ver.outputs.moduleId }}
 
     steps:
+      - name: Set up Node 18
+        uses: actions/setup-node@v3
+        with:
+            node-version: '18'
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Set RELEASE_STATUS
         if: ${{ github.ref == 'refs/heads/master' && github.event_name == 'push' }}
