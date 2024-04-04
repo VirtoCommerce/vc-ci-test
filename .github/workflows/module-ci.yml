@@ -1,5 +1,5 @@
 # vTest CI
-name: Module CI
+name: Module CI vTest
 
 on:
   schedule:
