@@ -9,16 +9,16 @@ on:
       - '.github/**'
       - 'docs/**'
       - 'build/**'
-      - 'README.md'
+      # - 'README.md'
       - 'LICENSE'
       - '**/argoDeploy.json'
       - '**/cloudDeploy.json'
       - samples/**
     branches:
-      [master, dev]
+      [master, main, dev]
   pull_request:
     branches:
-      [master, dev]
+      [master, main, dev]
     paths-ignore:
       - 'docs/**'
       - 'build/**'
