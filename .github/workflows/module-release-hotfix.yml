@@ -10,6 +10,9 @@ on:
         required: true
         default: true
         type: boolean
+  push:
+    branches:
+      [dev]
 
 jobs:
   # test:
