@@ -12,7 +12,7 @@ on:
         type: boolean
   push:
     branches:
-      [dev]
+      [dev, test-vcst-915]
 
 jobs:
   # test:
