@@ -1,0 +1,77 @@
+name: scan
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      [dev]
+jobs:
+  build:
+    name: Scan
+    runs-on: ubuntu-20.04
+    env:
+      tag: '3.809.0-alpha.12863-dev-06cf1fbb'
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          #image-ref: 'ghcr.io/virtocommerce/platform:${{ env.tag }}'
+          image-ref: 'ghcr.io/virtocommerce/virtostart:3.818.0-8a4fba1e'
+          format: 'json'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+          output: './${{ env.tag }}.json'
+      
+      - name: Publish file
+        uses: actions/upload-artifact@v2
+        with:
+          name: '${{ env.tag }}.json'
+          path: './${{ env.tag }}.json'
+      - name: Process results
+        id: trivyResult
+        shell: pwsh
+        run: |
+          $report = Get-Content './${{ env.tag }}.json' -Raw | ConvertFrom-Json
+          $reportHash = @{}
+          foreach ($vulnerability in $report.Results) {
+            if ($Null -ne $vulnerability.Vulnerabilities.PkgName -and $reportHash.Keys -notcontains "[$($vulnerability.Vulnerabilities.Severity)] $($vulnerability.Vulnerabilities.PkgName)"){
+                if ($vulnerability.Vulnerabilities.PkgName.GetType().Name -eq 'String' -and $reportHash.Keys -notcontains $vulnerability.Vulnerabilities.PkgName){
+                    $reportHash.Add("[$($vulnerability.Vulnerabilities.Severity)] $($vulnerability.Vulnerabilities.PkgName)","$($vulnerability.Vulnerabilities.FixedVersion)<br />")
+                } else {
+                    $i = 0
+                    while ($i -lt $vulnerability.Vulnerabilities.PkgName.Length) {
+                        if ($reportHash.Keys -notcontains "[$($vulnerability.Vulnerabilities.Severity[$i])] $($vulnerability.Vulnerabilities.PkgName[$i])"){
+                            $reportHash.Add( "[$($vulnerability.Vulnerabilities.Severity[$i])] $($vulnerability.Vulnerabilities.PkgName[$i])","$($vulnerability.Vulnerabilities.FixedVersion[$i])<br />")
+                        }
+                        $i += 1
+                    }
+                }
+            }
+          }
+          $text = @()
+          $reportHash.keys | Sort-Object Name | ForEach-Object{
+            $text += '{0} : {1}' -f $_, $reportHash[$_]
+          }
+          echo "::set-output name=VULN_PACKAGES::$text"
+    
+      - shell: pwsh
+        if: ${{ steps.trivyResult.outputs.VULN_PACKAGES != '' }} 
+        run: |
+          $labels = $labelsList = @()
+          echo "Getting the list of labels"
+          $labels = $(gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/${{ github.repository }}/labels) | convertFrom-Json
+          foreach ($l in $labels){
+            $labelsList += $l.Name
+          }
+          echo "Labels found: $labelsList"
+          echo "Checking 'VULNERABILITY' label to exist"
+          if ($labelsList -notcontains 'VULNERABILITY'){
+            echo "Creating 'VULNERABILITY' label "
+            gh api --method POST -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/${{ github.repository }}/labels -f "name=VULNERABILITY" -f "description=Docker image vulnerabilities found on `Run Trivy vulnerability scanner` step." -f "color=f29513"
+          }
+          $ref = "${{ GITHUB.REF_NAME }}"
+          $PRnumber = $ref.Split("/")[0]
+          echo "Set new comment body and label to PR"
+          gh api --method POST -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/${{ github.repository }}/issues/$PRnumber -f "body=[SEVERITY] PackageName Version(s)WithFix<br/>------<br/>${{ steps.trivyResult.outputs.VULN_PACKAGES }}" -f "labels[]=VULNERABILITY"
