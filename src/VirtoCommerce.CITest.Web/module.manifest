@@ -12,7 +12,7 @@
   <owners>
     <owner>VirtoCommerce</owner>
   </owners>
-  <projectUrl>https://github.com/VirtoCommerce/vc-module-ci-test</projectUrl>
+  <projectUrl>https://github.com/VirtoCommerce/vc-ci-test</projectUrl>
   <iconUrl>Modules/$(VirtoCommerce.CITest)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
   <releaseNotes>First version.</releaseNotes>
