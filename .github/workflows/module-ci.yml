@@ -155,9 +155,9 @@ jobs:
         id: artifactUrl
         run: |
           if [ '${{ github.ref }}' = 'refs/heads/master' ]; then
-            echo ::set-output name=download_url::${{ steps.githubRelease.outputs.downloadUrl }}
+            echo "download_url=${{ steps.githubRelease.outputs.downloadUrl }}" >> $GITHUB_OUTPUT
           else
-            echo ::set-output name=download_url::${{ steps.blobRelease.outputs.packageUrl }}
+            echo "download_url=${{ steps.blobRelease.outputs.packageUrl }}" >> $GITHUB_OUTPUT
           fi;
 
       - name: Setup Git Credentials
@@ -178,3 +178,4 @@ jobs:
             git add Directory.Build.props *module.manifest
             git commit -m "ci: Auto IncrementPatch"
             git push
+
