@@ -3,20 +3,21 @@ on:
   workflow_dispatch:
   pull_request:
     branches:
-      [dev]
+      # [dev]
+      [test-VCST-923]
 jobs:
   build:
     name: Scan
     runs-on: ubuntu-20.04
     env:
-      tag: '3.809.0-alpha.12863-dev-06cf1fbb'
+      tag: '3.907.0-pr-2943-82e8-vcst-3636-82e8fe2c'
       GH_TOKEN: ${{ secrets.REPO_TOKEN }}
     steps:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          #image-ref: 'ghcr.io/virtocommerce/platform:${{ env.tag }}'
-          image-ref: 'ghcr.io/virtocommerce/virtostart:3.818.0-8a4fba1e'
+          image-ref: 'ghcr.io/virtocommerce/platform:${{ env.tag }}'
+          # image-ref: 'ghcr.io/virtocommerce/virtostart:3.818.0-8a4fba1e'
           format: 'json'
           exit-code: '0'
           ignore-unfixed: true
