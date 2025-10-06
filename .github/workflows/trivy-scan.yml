@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Scan
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       tag: '3.907.0-pr-2943-82e8-vcst-3636-82e8fe2c'
       GH_TOKEN: ${{ secrets.REPO_TOKEN }}
