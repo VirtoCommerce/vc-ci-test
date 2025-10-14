@@ -5,6 +5,9 @@ on:
     branches:
       # [dev]
       [test-VCST-923]
+  push:
+    branches:
+      [test-VCST-923]
 jobs:
   build:
     name: Scan
