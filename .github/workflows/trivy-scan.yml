@@ -1,4 +1,4 @@
-name: scan
+name: Scan image for vulnerabilities
 on:
   workflow_dispatch:
   pull_request:
@@ -23,16 +23,11 @@ jobs:
           # image-ref: 'ghcr.io/virtocommerce/virtostart:3.818.0-8a4fba1e'
           format: 'json'
           exit-code: '0'
-          ignore-unfixed: true
+          ignore-unfixed: false #true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
           output: './${{ env.tag }}.json'
       - name: Publish file
-        uses: actions/upload-artifact@v4
-        with:
-          name: '${{ env.tag }}.json'
-          path: './${{ env.tag }}.json'
-      - name: Upload file
         uses: actions/upload-artifact@v4
         with:
           name: '${{ env.tag }}.json'
