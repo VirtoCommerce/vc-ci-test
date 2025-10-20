@@ -114,14 +114,26 @@ jobs:
                                                       @{
                                                           type  = "link"
                                                           attrs = @{
-                                                              href = "https://github.com/$($env:GITHUB_REPOSITORY)/actions/runs/$($env:GITHUB_RUN_ID)/job/$($env:GITHUB_JOB))"
+                                                              href = "https://github.com/$($env:GITHUB_REPOSITORY)/actions/runs/$($env:GITHUB_RUN_ID)"
                                                           }
                                                       }
                                                   )
                                               },
                                               @{
                                                   type = "text"
-                                                  text = "Title:`n    $($vulnerability.Title)`nDescription:`n    $($vulnerability.Description)`nSeverity:`n    $($vulnerability.Severity)`nURL:`n    $($vulnerability.PrimaryURL)`nCweIDs:`n    $($vulnerability.CweIDs)`nPublished:`n    $($vulnerability.PublishedDate)`n"
+                                                  text = "Title:`n    $($vulnerability.Title)`nDescription:`n    $($vulnerability.Description)`nSeverity:`n    $($vulnerability.Severity)`nCweIDs:`n    $($vulnerability.CweIDs)`nPublished:`n    $($vulnerability.PublishedDate)`n"
+                                              },
+                                              @{
+                                                  type    = "text"
+                                                  text    = "CVE URL"
+                                                  "marks" = @(
+                                                      @{
+                                                          type  = "link"
+                                                          attrs = @{
+                                                              href = "https://github.com/$($env:GITHUB_REPOSITORY)/actions/runs/$($env:GITHUB_RUN_ID)"
+                                                          }
+                                                      }
+                                                  )
                                               }
                                           )
                                       }
