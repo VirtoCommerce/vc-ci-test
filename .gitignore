@@ -337,3 +337,5 @@ ASALocalRun/
 .nuke
 dist/
 **/Properties/launchSettings.json
+.vscode/launch.json
+.github/workflows/Untitled-1.ps1
