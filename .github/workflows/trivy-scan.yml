@@ -130,7 +130,7 @@ jobs:
                                                       @{
                                                           type  = "link"
                                                           attrs = @{
-                                                              href = "https://github.com/$($env:GITHUB_REPOSITORY)/actions/runs/$($env:GITHUB_RUN_ID)"
+                                                              href = "$($vulnerability.PrimaryURL)"
                                                           }
                                                       }
                                                   )
