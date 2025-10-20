@@ -109,7 +109,7 @@ jobs:
                                               },
                                               @{
                                                   type    = "text"
-                                                  text    = "`nWorkflow run.`n"
+                                                  text    = "`nWorkflow run`n"
                                                   "marks" = @(
                                                       @{
                                                           type  = "link"
@@ -121,11 +121,11 @@ jobs:
                                               },
                                               @{
                                                   type = "text"
-                                                  text = "Title:`n    $($vulnerability.Title)`nDescription:`n    $($vulnerability.Description)`nSeverity:`n    $($vulnerability.Severity)`nCweIDs:`n    $($vulnerability.CweIDs)`nPublished:`n    $($vulnerability.PublishedDate)`n"
+                                                  text = "Title:`n    $($vulnerability.Title)`nDescription:`n    $($vulnerability.Description)`nSeverity:`n    $($vulnerability.Severity)`nCweIDs:`n    $($vulnerability.CweIDs)`nPublished:`n    $($vulnerability.PublishedDate)`nCVE URL:"
                                               },
                                               @{
                                                   type    = "text"
-                                                  text    = "CVE URL"
+                                                  text    = "`n    $($vulnerability.PrimaryURL)"
                                                   "marks" = @(
                                                       @{
                                                           type  = "link"
