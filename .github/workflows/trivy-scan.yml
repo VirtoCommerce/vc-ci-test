@@ -121,11 +121,11 @@ jobs:
                                               },
                                               @{
                                                   type = "text"
-                                                  text = "Title:`n    $($vulnerability.Title)`nDescription:`n    $($vulnerability.Description)`nSeverity:`n    $($vulnerability.Severity)`nCweIDs:`n    $($vulnerability.CweIDs)`nPublished:`n    $($vulnerability.PublishedDate)`nCVE URL:"
+                                                  text = "Title:`n    $($vulnerability.Title)`nDescription:`n    $($vulnerability.Description)`nSeverity:`n    $($vulnerability.Severity)`nCweIDs:`n    $($vulnerability.CweIDs)`nPublished:`n    $($vulnerability.PublishedDate)`nCVE URL:`n    "
                                               },
                                               @{
                                                   type    = "text"
-                                                  text    = "`n    $($vulnerability.PrimaryURL)"
+                                                  text    = "$($vulnerability.PrimaryURL)"
                                                   "marks" = @(
                                                       @{
                                                           type  = "link"
