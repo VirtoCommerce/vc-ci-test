@@ -13,14 +13,14 @@ jobs:
     name: Scan
     runs-on: ubuntu-22.04
     env:
-      tag: 'linux-latest'
+      tag: 'virtostart-linux-latest'
       GH_TOKEN: ${{ secrets.REPO_TOKEN }}
     steps:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'ghcr.io/virtocommerce/platform:${{ env.tag }}'
-          # image-ref: 'ghcr.io/virtocommerce/virtostart:3.818.0-8a4fba1e'
+          # image-ref: 'ghcr.io/virtocommerce/platform:${{ env.tag }}'
+          image-ref: 'ghcr.io/virtocommerce/virtostart:3.818.0-8a4fba1e'
           format: 'json'
           exit-code: '0'
           ignore-unfixed: false #true
