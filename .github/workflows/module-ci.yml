@@ -187,6 +187,7 @@ jobs:
           packageUrl: ${{ steps.blobRelease.outputs.packageUrl }}
 
       - name: Increment Patch Version
+        if: ${{ (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master')  }}
         run: |
             vc-build IncrementPatch
             git add Directory.Build.props *module.manifest
