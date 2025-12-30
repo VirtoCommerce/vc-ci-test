@@ -16,17 +16,6 @@ on:
       - samples/**
     branches:
       [master, dev]
-  pull_request:
-    branches:
-      [master, dev]
-    paths-ignore:
-      - 'docs/**'
-      - 'build/**'
-      - 'README.md'
-      - 'LICENSE'
-      - '**/argoDeploy.json'
-      - '**/cloudDeploy.json'
-      - samples/**
     
 jobs:
   ci:
