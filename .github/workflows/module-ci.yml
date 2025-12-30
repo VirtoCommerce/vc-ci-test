@@ -3,7 +3,7 @@ name: Module CI vTest
 
 on:
   schedule:
-  - cron: 0 0 * * 1-5
+    - cron: 0 0 * * 1-5
   workflow_dispatch:
   push:
     paths-ignore:
@@ -30,8 +30,8 @@ on:
 jobs:
   ci:
     if: ${{ github.actor != 'dependabot[bot]' &&
-        (github.event.pull_request.head.repo.full_name == github.repository ||
-        github.event.pull_request.head.repo.full_name == '') }}  # Check that PR not from forked repo and not from Dependabot
+          (github.event.pull_request.head.repo.full_name == github.repository ||
+          github.event.pull_request.head.repo.full_name == '') }}  # Check that PR not from forked repo and not from Dependabot
     runs-on: ubuntu-latest
     env:
       CLOUD_INSTANCE_BASE_URL: ${{secrets.CLOUD_INSTANCE_BASE_URL}}
@@ -188,8 +188,8 @@ jobs:
 
       - name: Increment Patch Version
         run: |
-          vc-build IncrementPatch
-          git add Directory.Build.props *module.manifest
-          git commit -m "ci: Auto IncrementPatch"
-          git push
+            vc-build IncrementPatch
+            git add Directory.Build.props *module.manifest
+            git commit -m "ci: Auto IncrementPatch"
+            git push
     
