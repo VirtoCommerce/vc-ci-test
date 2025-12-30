@@ -66,7 +66,7 @@ jobs:
         run: |
           echo "RELEASE_STATUS=true" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -192,4 +192,3 @@ jobs:
             git add Directory.Build.props *module.manifest
             git commit -m "ci: Auto IncrementPatch"
             git push
-    
