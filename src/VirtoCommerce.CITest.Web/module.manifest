@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <id>VirtoCommerce.CITest</id>
-  <version>3.800.694</version>
+  <version>3.1000.0</version>
   <version-tag />
-  <platformVersion>3.800.0</platformVersion>
+  <platformVersion>3.1039.12</platformVersion>
   <title>VirtoCommerce CITest extension module</title>
   <description>VirtoCommerce CITest extension module</description>
   <authors>
-    <author>Jon Doe</author>
+    <author>Oleg Zhuk</author>
   </authors>
   <owners>
     <owner>VirtoCommerce</owner>
@@ -16,7 +16,7 @@
   <iconUrl>Modules/$(VirtoCommerce.CITest)/Content/logo.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
   <releaseNotes>First version.</releaseNotes>
-  <copyright>Copyright © 2024 VirtoCommerce. All rights reserved</copyright>
+  <copyright>Copyright © 2026 VirtoCommerce. All rights reserved</copyright>
   <tags>extension module</tags>
   <assemblyFile>VirtoCommerce.CITest.Web.dll</assemblyFile>
   <moduleType>VirtoCommerce.CITest.Web.Module, VirtoCommerce.CITest.Web</moduleType>
